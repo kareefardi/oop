@@ -21,7 +21,19 @@ public:
                 }
                 else {
                         delete[] a.array;
-                        a.array = this.array;
+                        a.array = array;
+                        a.Nel = Nel;
+                }
+                return this;
+        }
+        MaxHeap& + (const MaxHeap a, const MaxHeap b)
+        {
+                if((a.MaxSize + b.MaxSize) > this.MaxSize)
+                        // max size exceeded
+                else {
+                        delete[] array;
+                        MaxSize = a.MaxSize + b.MaxSize;
+                        
                 }
         }
         ~MaxHeap() { delete[] array; }
