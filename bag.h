@@ -14,19 +14,19 @@ public:
         {
         }
 
-        bool add(int e = 0)
+        bool ins(int e = 0)
         {
                 if (e < 0 || e > 256)
-                        return 'e';
-                        oSet[i] = ++oSet[i];
-                return 't';
+                        return false;
+                        oSet[e] = ++oSet[e];
+                return true;
         }
 
         bool rmv(int e = 0)
         {
                 if (e < 0 || e > 256)
                         return false;
-                        oSet[i] = --oSet[i];
+                        oSet[e] = --oSet[e];
                 return true;
         }
 
@@ -34,7 +34,7 @@ public:
         {
                 if (e < 0 || e > 256)
                         return -1;
-                return (int) oSet[i];
+                return (int) oSet[e];
         }
 };
 
