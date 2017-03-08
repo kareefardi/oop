@@ -1,21 +1,41 @@
 #include <iostream>
 #include "bag.h"
-
+#include <string>
 using namespace std;
+
+string codeHand(unsigned char c)
+{
+        string m;
+        switch(c) {
+        //static unsigned char res[] = {'g', 'v', 'h', 'u', 'l', 'r'};
+        case 'g':
+                m = "element out of range";
+                break;
+        case 'v':
+                m = "frequency overflow";
+                break;
+        case 'u':
+                m = "frequency underflow";
+                break;
+        case 'i':
+                m = "element inserted";
+                break;
+        case 'r':
+                m = "element removed";
+                break;
+        default:
+                m = c;
+                break;
+        }
+        return m;
+}
 
 void foo(Bag &b, int r, int op)
 {
         if (op)
-                if (b.ins(r))
-                        cout << r << " added \t freq " <<  b.chk(r) << '\n';
-                else
-                        cout << r << " out of range \n";
+                cout << r << " " << codeHand(b.ins(r)) << endl;
         else
-                if (b.rmv(r))
-                        cout << r << " removed \t freq " << b.chk(r) << '\n';
-                else
-                        cout << r << " out of range \n";
-
+                cout << r << " " << codeHand(b.rmv(r)) << endl;
 }
 
 int main() {
@@ -25,11 +45,17 @@ int main() {
         foo(test, x, 1);
         foo(test, x, 1);
         foo(test, x, 0);
+        foo(test, x, 0);
+        foo(test, x, 0);
         x = -1;
         foo(test, x, 1);
         foo(test, x, 0);
         x = 300;
         foo(test, x, 1);
         foo(test, x, 0);
+        x = 5;
+        for (int i = 0; i < 255; ++i)
+                test.ins(x);
+        foo(test, x, 1);
         return 0;
 }

@@ -3,6 +3,7 @@
 
 class Bag {
         unsigned char oSet[256];
+        static char res[5];
 public:
         Bag()
         {
@@ -14,23 +15,29 @@ public:
         {
         }
 
-        bool ins(int e = 0)
+        char ins(int e)
         {
                 if (e < 0 || e > 256)
-                        return false;
+                        return res[0];
+                if (oSet[e] != 255)
                         oSet[e] = ++oSet[e];
-                return true;
+                else
+                        return res[1];
+                return res[2];
         }
 
-        bool rmv(int e = 0)
+        char rmv(int e)
         {
                 if (e < 0 || e > 256)
-                        return false;
+                        return res[0];
+                if (oSet[e] == 0)
+                        return res[3];
+                else
                         oSet[e] = --oSet[e];
-                return true;
+                return res[4];
         }
 
-        int chk(int e = 0)
+        int chk(int e)
         {
                 if (e < 0 || e > 256)
                         return -1;
@@ -39,3 +46,5 @@ public:
 };
 
 #endif
+
+char Bag::res[5] = {'g', 'v', 'i', 'u', 'r'};;
