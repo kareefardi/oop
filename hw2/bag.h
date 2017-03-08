@@ -14,23 +14,29 @@ public:
         {
         }
 
-        bool ins(int e = 0)
+        void ins(int e)
         {
-                if (e < 0 || e > 256)
-                        return false;
-                        oSet[e] = ++oSet[e];
-                return true;
+                if (e < 0 || e > 256) {
+                        throw "insert out of range";
+                        if (oSet[e] == 255)
+                                throw "max freq reached";
+                        else
+                                oSet[e] = ++oSet[e];
+                }
         }
 
-        bool rmv(int e = 0)
+        void rmv(int e)
         {
-                if (e < 0 || e > 256)
-                        return false;
-                        oSet[e] = --oSet[e];
-                return true;
+                if (e < 0 || e > 256) {
+                        throw "remove out of range";
+                        if (oSet[e] == 0)
+                                throw "min freq reached";
+                        else
+                                oSet[e] = --oSet[e];
+                }
         }
 
-        int chk(int e = 0)
+        int chk(int e)
         {
                 if (e < 0 || e > 256)
                         return -1;
