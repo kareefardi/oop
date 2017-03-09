@@ -1,6 +1,9 @@
 #ifndef MAXHEAP_H
 #define MAXHEAP_H
 
+#include <string>
+using namespace std;
+
 class MaxHeap 
 {
 public:
@@ -11,41 +14,33 @@ public:
 
         MaxHeap(MaxHeap &a)
         {
-                a.array = new int[this.MaxSize + 1];
+                MaxSize = a.MaxSize;
+                Nel = a.Nel;
+                array = new int[MaxSize + 1];
                 for (int i = 0; i <= MaxSize; ++i)
-                        a.array[i] = this.array[i];
+                        array[i] = a.array[i];
         }
 
         MaxHeap& operator=(const MaxHeap a)
         {
-                if (this.MaxSize == a.MaxSize) {
-                        //not same size cannot assign
-                }
-                else {
-                        delete[] array;
-                        MaxSize = a.MaxSize;
-                        Nel = a.Nel;
-                        array = new int[MaxSize + 1];
-                        for (int i = 0; i <= MaxSize; ++i)
-                                array[i] = a.array[i];
-                }
-                return this;
+                delete[] array;
+                MaxSize = a.MaxSize;
+                Nel = a.Nel;
+                array = new int[MaxSize + 1];
+                for (int i = 0; i <= MaxSize; ++i)
+                        array[i] = a.array[i];
+                        return this;
         }
 
-        MaxHeap& operator+(const MaxHeap a, const MaxHeap b)
+        MaxHeap& operator+(const MaxHeap a)
         {
-                if(((a.MaxSize + b.MaxSize) > MaxSize) | ((a.Nel + b.Nel) > MaxSize))
-                        // max size exceeded
-                else {
-                        delete[] array;
-                        MaxSize = a.MaxSize + b.MaxSize;
-                        array = new int[MaxSize + 1];
-                        for (int i = 0; i <= a.MaxSize; ++i)
-                                Insert(a.arraypi[i]);
-                        for (int i = 0; i <= b.MaxSize; ++i)
-                                Insert(b.arraypi[i];
-                }
-                return this;
+        }
+
+        MaxHeap& operator[] (const int i)
+        {
+                int *arr_tmp = new int[MaxSize + 1];
+                int e = 0;
+                for (int i = 0; i <= MaxSize; ++i)
         }
 
         MaxHeap& operator+(const MaxHeap a, const int b)
@@ -94,7 +89,7 @@ bool MaxHeap::DelMax(int & item)
         item = array[1]; 
         array[1] = array[Nel--];
         Adjust(array, 1, Nel); 
-        return true; 
+        return true;
 }
 
 void MaxHeap::Adjust(int a[], int i, int n) 
