@@ -21,7 +21,7 @@ public:
                         array[i] = a.array[i];
         }
 
-        MaxHeap& operator=(const MaxHeap a)
+        MaxHeap& operator=(const MaxHeap &a)
         {
                 delete[] array;
                 MaxSize = a.MaxSize;
@@ -29,11 +29,38 @@ public:
                 array = new int[MaxSize + 1];
                 for (int i = 0; i <= MaxSize; ++i)
                         array[i] = a.array[i];
-                        return this;
+                return this;
         }
 
-        MaxHeap& operator+(const MaxHeap a)
+        MaxHeap& operator+(const MaxHeap &a)
         {
+                int tmp_size = MaxSize + 1 + a.MaxSize
+                MaxHeap* tmp = new MaxHeap(tmp_size);
+                tmp->Nel = Nel + a.Nel;
+                tmp->MaxSize = tmp_size - 1;
+                int i = 0;
+                for (i = 0; i < Nel; ++i)
+                        res[i] = array[i];
+                for (i; i < a.Nel; ++i)
+                        res[i] = a.array[a.Nel - i];
+                tmp->array = res;
+                tmp->Adjust(array, 0, Nel);
+                return tmp;
+        }
+
+        MaxHeap& operator+=(const MaxHeap &a)
+        {
+                int* tmp = new int[Nel];
+                for (int i = 0; i < Nel; ++i)
+                        tmp[Nel] = array[Nel];
+                delete[] array;
+                MaxSize += a.MaxSize;
+                for (int i = 0; i < Nel; ++i)
+                        array[i] = tmp[i];
+                Nel += a.Nel;
+                for (int i = a.Nel; i < Nel; ++i)
+                        array[i] = a.array[a.Nel - i];
+                Adjust(array, 0, Nel);
         }
 
         MaxHeap& operator[] (const int i)
@@ -43,16 +70,7 @@ public:
                 for (int i = 0; i <= MaxSize; ++i)
         }
 
-        MaxHeap& operator+(const MaxHeap a, const int b)
-        {
-                if((Nel + 1) = MaxSize)
-                        // max size exceeded
-                else
-                        Insert(b);
-                return this;
-        }
 
-        MaxHeap& operator
         ~MaxHeap() { delete[] array; }
         bool Insert(int item);  // Insert item.
         bool DelMax(int & item); // Delete the maximum.
