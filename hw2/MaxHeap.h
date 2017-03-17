@@ -50,7 +50,6 @@ public:
                 MaxHeap *res = new MaxHeap(MaxSize + 1);
                 for (int i = 0; i <= Nel; ++i) {
                         res->array[i] = array[i];
-                        std::cout << res->array[i] << std::endl;
                 }
                 res->Nel = Nel;
                 res->MaxSize = MaxSize + 1;
@@ -67,6 +66,7 @@ public:
                 delete []array;
                 MaxSize = MaxSize + a.MaxSize;
                 array = new int [MaxSize + 1];
+                array[0] = 0;
                 for (int i = 1; i <= Nel; ++i)
                         array[i] = tmp[i - 1];
                 if (this != &a)
@@ -75,6 +75,20 @@ public:
                 else
                         for (int i = 0; i < Nel_tmp; ++i)
                                 Insert(tmp[i]);
+        }
+
+        void operator+=(int x) {
+                int Nel_tmp = Nel;
+                int*tmp = new int[Nel];
+                for (int i = 0; i < Nel; ++i)
+                        tmp[i] = array[i + 1];
+                delete []array;
+                MaxSize = MaxSize + 1;
+                array = new int [MaxSize + 1];
+                array[0] = 0;
+                for (int i = 1; i <= Nel; ++i)
+                        array[i] = tmp[i - 1];
+                Insert(x);  
         }
 
         int operator[](int x)

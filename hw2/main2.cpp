@@ -23,5 +23,7 @@ int main() {
         }
         naw = naw + 1;
         cout << "naw: " << naw << endl;
+        naw += 8;
+        cout << "naw: " << naw << endl;
         return 0;
 }

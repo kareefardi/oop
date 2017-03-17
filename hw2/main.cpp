@@ -38,7 +38,7 @@ void foo(Bag &b, int r, int op)
                 cout << r << " " << codeHand(b.rmv(r)) << endl;
 }
 
-int main2() {
+int main() {
         Bag test;
         int x;
         x = 2;
