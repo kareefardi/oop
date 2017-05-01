@@ -12,6 +12,9 @@ class State {
 	std::map <std::string, int> trans;
 	std::string getAction(std::string);
 	std::map<std::string, int> *var;
+	int run = 0;
+	int wait = 0;
+	int end = 0;
 
 	void addaExpr(std::string);
 	void addaOut(std::string);
@@ -20,7 +23,7 @@ class State {
 	void addaSleep(std::string);
 
 public:
-	State();
+	State(std::string);
 	~State();
 
 	void setVar(std::map<std::string, int>*);

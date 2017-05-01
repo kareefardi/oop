@@ -7,11 +7,34 @@
 #include <sstream>
 #include <iostream>
 
+#define OUT = "out"
+#define END = "end"
+#define WAIT = "wait"
+
 std::string State::tasks[5] = {"out", "sleep", "wait", "run", "end"};
 
-State::State()
+void State::addAction(std::string action)
 {
+	std::stringstream ss(action);
+	std::string name;
+	ss << name;
 
+	if (name == OUT)
+		action.push_back(new Out(in, var));
+	else if(name == END)
+		action.push_back(new End)
+
+}
+State::State(std::string name, std::string actions)
+{
+	this->name = name;
+	
+	std::string actoin;
+	std::stringstream ss(actions);
+	while (getline(ss, action, ',')) {
+			ss >> action;
+			addAction(action);
+		}
 }
 
 State::~State()
@@ -64,38 +87,6 @@ void State::addaExpr(std::string in)
 {
 	in.pop_back();
 	action.push_back(new Expr((in), var));
-}
-
-void State::addAction(std::string in)
-{
-	
-	std::string task = getAction(in);
-	/////////////// find other solution than switch !!!	
-	/*
-	switch(task) {
-	case "out":
-		//action.push_back(new Out(in)); 
-		break;
-	case "expr":
-		//action.push_back(new Expr(in));
-		break;
-	case "sleep":
-		//action.push_back(new Sleep(in));
-		break;
-	case "wait":
-		//action.push_back(new Wait(in));
-		break;
-	case "run":
-		//action.push_back(new Run(in));
-		break;
-	case "end":
-		//action.push_back(new End(in));
-		break;
-	default:
-		throw "Undefined Action";
-		break;
-	}
-	*/
 }
 
 void State::addTrans(std::string name, int val)

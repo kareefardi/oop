@@ -43,6 +43,12 @@
 #define VAR "Var"
 #define STATE "State"
 #define TRANS "Transitions"
+
+void Fsm::parseName(std::istream& in)
+{
+	in >> fsm_name;
+}
+
 void Fsm::parseVars(std::istream& in)
 {
 	std::string line;
@@ -52,6 +58,31 @@ void Fsm::parseVars(std::istream& in)
 
 	while(std::getline(ss, vars, ',')) {
 		var.insert(std::pair<std::string, int> (vars, 0));
+	}
+}
+
+void Fsm::parseState(std::istream& in)
+{
+	getStateInfo(in);
+
+	std::stringstream ss;
+	std::string actions;
+	std::string name;
+	int index = 0;
+
+	for (std::vector<std::string>::iterator i = state_info.begin(); i != state_info.end(); ++i) {
+		ss << (*i);
+		ss >> name;
+		getline(ss, action);
+
+		name.pop_back();
+		
+		state_name.insert(std::pair<std::string, int> (name, index));
+		state.push_back(State(name, actions));
+		state[index].setName(name);
+		state[index].setVar(&var);
+
+		++index;
 	}
 }
 
@@ -69,32 +100,6 @@ void Fsm::getStateInfo(std::istream& in)
 	in.seekg(offset, std::ios_base::cur);
 }
 
-void Fsm::parseState(std::istream& in)
-{
-	getStateInfo(in);
-
-	std::stringstream ss;
-	std::string action;
-	std::string name;
-	int index = 0;
-
-	for (std::vector<std::string>::iterator i = state_info.begin(); i != state_info.end(); ++i) {
-		ss << (*i);
-		ss >> name;
-		name.pop_back();
-		
-		state_name.insert(std::pair<std::string, int> (name, index));
-		state.push_back(State());
-		state[index].setName(name);
-		state[index].setVar(&var);
-
-		while (getline(ss, action, ',')) {
-			ss >> action;
-			state[index].addAction(action);
-		}
-		++index;
-	}
-}
 
 void Fsm::parseTrans(std::istream& in)
 {
@@ -142,4 +147,18 @@ void Fsm::parseFsm(std::istream& in)
 		++i;
 	}
 	*/
+	while (!in.eof()) {
+		in >> data;
+		data.pop_back();
+		if (data == fsm)
+			parseName(in);
+		else if (data == var)
+			parseVars(in);
+		else if (data == state)
+			parseState(in);
+		else if (data == trans)
+			parseTrans(in);
+		else
+			// default
+	}
 }
