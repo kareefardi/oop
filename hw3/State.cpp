@@ -10,6 +10,7 @@
 #define OUT = "out"
 #define END = "end"
 #define WAIT = "wait"
+#define RUN = "run"
 
 std::string State::tasks[5] = {"out", "sleep", "wait", "run", "end"};
 
@@ -19,10 +20,26 @@ void State::addAction(std::string action)
 	std::string name;
 	ss << name;
 
+	std::string param;
+	getline (ss, param);
+
 	if (name == OUT)
-		action.push_back(new Out(in, var));
-	else if(name == END)
-		action.push_back(new End)
+		action.push_back(new Out(param, var));
+	else if(name == END) {
+		action.push_back(new End());
+		end = 1;
+	}
+	else if (name == WAIT) {
+		action.push_back(new Wait(&std::cout, &std::cin));
+		wait = 1;
+	}
+	else if (name == RUN) {
+		action.push_back(new Run()); // complete run..
+		run = 1;
+	}
+	else if (name == SLEEP)
+		action.push_back(new Sleep(param));
+	else if (name )
 
 }
 State::State(std::string name, std::string actions)
