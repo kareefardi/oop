@@ -10,20 +10,13 @@ class State {
 	std::string name;
 	std::vector <Action*> action;
 	std::map <std::string, int> trans;
-	std::string getAction(std::string);
-	std::map<std::string, int> *var;
+	std::map <std::string, int> *var;
 	int run = 0;
 	int wait = 0;
 	int end = 0;
 
-	void addaExpr(std::string);
-	void addaOut(std::string);
-	void addaWait(std::string);
-	void addaRun(std::string);
-	void addaSleep(std::string);
-
 public:
-	State(std::string);
+	State(std::string, std::string);
 	~State();
 
 	void setVar(std::map<std::string, int>*);
