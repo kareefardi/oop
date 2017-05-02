@@ -3,9 +3,10 @@ CC := g++
 CFLAGS := -c -std=c++11 
 LFLAGS := -std=c++11
 NAME := test
+CNAME := main.cpp
 
-$(NAME) : $(OBJS)
-	$(CC) $(LFLAGS) $(OBJS) -o $(NAME)
+all: $(OBJS)
+	$(CC) $(CNAME) $(LFLAGS) $(OBJS) -o $(NAME)
 
 End.o : End.h End.cpp Action.o
 	$(CC) $(CFLAGS) End.cpp
@@ -31,5 +32,5 @@ Sleep.o : Sleep.h Sleep.cpp Action.o
 Action.o : Action.h Action.cpp
 	$(CC) $(CFLAGS) Action.cpp
 
-Run.o : Run.h Run.cpp
+Run.o : Run.h Run.cpp 
 	$(CC) $(CFLAGS) Run.cpp

@@ -1,45 +1,7 @@
-#include <iostream>
-/*include <string>
-/*define fsm "FSM"
-/*define errormsg(ex, out) "Expected: " ex " got: " out
-/*bool validate(std::string chk, std::string in)
-{
-	if (chk != in)
-		return false;
-	return true;
-}*/
-/*void ParseFsm(std::istream& in) 
-{
-	std::string data;
-	std::string fsm_name;
-	in >> data;
-	if(data != fsm)
-		throw errormsg(fsm, data)
-	in >> fsm_name;
-	in >> data;
-	if (data == var)
-		getnVar(in);
-	else {
-		if (data == states)
-			getStates(in);
-		else
-			throw errormsg(states, data);
-	}
-	in >> data;
-	if (data == states)
-		getStates(in);
-	else {
-		if (data == trans)
-			getTrans(in);
-		else
-			throw errormsg(trans, data);
-	}
-	if (!in.eof())
-
-}*/ 
 #include "Fsm.h"
 #include <sstream>
 #include <fstream>
+#include <iostream>
 
 #define FSM "Fsm"
 #define VAR "Var"
@@ -51,7 +13,7 @@ std::vector<std::string> Fsm::glbl_fsm = {"zz"};
 Fsm::Fsm(std::string name)
 {
 	std::ifstream file;
-	file.open(name + "txt");
+	file.open(name + ".txt");
 	if(!file.fail()) {
 		Fsm::glbl_fsm.push_back(name);
 		parseFsm(file);

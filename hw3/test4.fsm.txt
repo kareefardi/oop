@@ -1,0 +1,16 @@
+FSM test4
+VAR X, Y
+States:
+a: out "state A", out A, s=X+1, X=10+X, out X
+a: out "error"
+b: out "state B", Y=X+1, sleep 5, wait
+c: out "thank you for using fsm1", out X, out Y, end
+
+Transitions:
+
+a, b, 1
+b, a, 2
+a, a, 2
+b, b, 1
+c, b, 1
+b, c, 3

@@ -42,7 +42,7 @@ void State::addAction(std::string action)
 			wait = 1;
 		}
 		else if (name == RUN) {
-			this->action.push_back(new Run(param));
+			// this->action.push_back(new Run(param));
 			run = 1;
 		}
 		else if (name == SLEEP)
