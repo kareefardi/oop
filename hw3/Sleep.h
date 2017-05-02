@@ -8,7 +8,7 @@ class Sleep : public Action {
 	int time;
 public:
 	Sleep(std::string);
-	~Sleep(){};
+	~Sleep();
 	virtual int exec();
 };
 

@@ -39,10 +39,32 @@
 }*/ 
 #include "Fsm.h"
 #include <sstream>
+#include <fstream>
+
 #define FSM "Fsm"
 #define VAR "Var"
 #define STATE "State"
 #define TRANS "Transitions"
+
+std::vector<std::string> Fsm::glbl_fsm = {"zz"};
+
+Fsm::Fsm(std::string name)
+{
+	std::ifstream file;
+	file.open(name + "txt");
+	if(!file.fail()) {
+		Fsm::glbl_fsm.push_back(name);
+		parseFsm(file);
+	}
+	else
+		throw "Fsm file not found";
+	file.close();
+}
+
+Fsm::~Fsm()
+{
+	Fsm::glbl_fsm.pop_back();
+}
 
 void Fsm::parseName(std::istream& in)
 {
@@ -84,7 +106,7 @@ void Fsm::parseState(std::istream& in)
 		++index;
 
 		std::getline(in, info);
-	};
+	}
 	int offset = -12;
 	in.seekg(offset, std::ios_base::cur);
 }
@@ -134,5 +156,23 @@ void Fsm::parseFsm(std::istream& in)
 			parseTrans(in);
 		//else
 			// default
+	}
+}
+
+void Fsm::run()
+{
+	std::string cur = state_name.begin()->first;
+	int cur_idx = state_name.begin()->second;
+	try {
+		while(!state[cur_idx].isEnd()) {
+			cur = state[cur_idx].runState();
+			if (state_name.count(cur) == 0)
+				throw "State Not Found";
+			else
+				cur_idx = state_name[cur];
+		}
+	}
+	catch(const char *caught) {
+		std::cout << caught << std::endl;
 	}
 }

@@ -32,6 +32,7 @@ void Out::parseOut()
 		is_msg = true;
 		msg.erase(0, 1);
 		is_valid = isMValid();
+		msg.pop_back();
 	}
 	else if (isExpr()) 
 		expr = new Expr(msg, var);
@@ -54,16 +55,21 @@ int Out::exec()
 		if (is_valid)
 			os << msg << std::endl;
 		else
-			return -1;
+			throw "Out msg not valid";
 	else if (is_var) {
 		int cnt = var->count(msg);
 		if (cnt == 0)
-			return -1;
+			throw "Out var not found";
 		else
 			os << (*var)[msg] << std::endl;
 	}
 	else
-		expr->exec();
+		try {
+			expr->exec();
+		}
+		catch (const char *s) {
+			throw (*s);
+		}
 	return 0;
 }
 

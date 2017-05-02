@@ -13,7 +13,7 @@ class Fsm{
 	std::map <std::string, int> var;
 
 public:
-	Fsm();
+	Fsm(std::string);
 	~Fsm();
 
 	void parseFsm(std::istream&);
@@ -21,5 +21,8 @@ public:
 	void parseVars(std::istream&);
 	void parseTrans(std::istream&);
 	void parseState(std::istream&);
+	void run();
+
+	static std::vector<std::string> glbl_fsm;
 };
 #endif

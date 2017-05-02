@@ -19,6 +19,7 @@ bool Wait::isValidInput()
 	else
 		return true;
 }
+
 int Wait::exec()
 {
 	int x;

@@ -10,7 +10,7 @@ $(NAME) : $(OBJS)
 End.o : End.h End.cpp Action.o
 	$(CC) $(CFLAGS) End.cpp
 
-State.o : State.h State.cpp End.o Sleep.o Out.o Expr.o Wait.o Action.o
+State.o : State.h State.cpp End.o Sleep.o Out.o Expr.o Wait.o Action.o Run.o
 	$(CC) $(CFLAGS) State.cpp
 
 Wait.o : Wait.h Wait.cpp Action.o
@@ -28,6 +28,8 @@ Fsm.o : State.o Fsm.cpp Action.o
 Sleep.o : Sleep.h Sleep.cpp Action.o
 	$(CC) $(CFLAGS) Sleep.cpp
 
-Action.o :
+Action.o : Action.h Action.cpp
 	$(CC) $(CFLAGS) Action.cpp
 
+Run.o : Run.h Run.cpp
+	$(CC) $(CFLAGS) Run.cpp

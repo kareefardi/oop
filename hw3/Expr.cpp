@@ -31,8 +31,10 @@ int Expr::exec()
 	else
 		is_valid = true;
 
-	if (is_valid)
+	if (is_valid) {
 		(*var)[x] = (*var)[a] + (*var)[b];
-
-	return (is_valid) ? 0 : -1;
+	}
+	else
+		throw "Invalid Expression";
+	return 0;
 }

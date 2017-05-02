@@ -12,5 +12,5 @@ End::~End()
 
 int End::exec()
 {
-	return -10;
+	return -1;
 }

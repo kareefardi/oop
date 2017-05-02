@@ -23,6 +23,8 @@ public:
 	void setName(std::string);
 	void addAction(std::string);
 	void addTrans(std::string, int);
+	bool isEnd();
+	std::string runState();
 	static std::string tasks[5]; 
 };
 
